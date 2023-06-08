@@ -1,0 +1,4 @@
+1- intalar o express: npm i express
+2 - intalar typescript : npm i -D typescript
+3 - intalar o a integração do typescript com o express: npm i -D @types/express
+4 - intala o ts-node-dev para que possa rodar o servidor no ambinte de desenvolvimento: npm i -D ts-node-dev
