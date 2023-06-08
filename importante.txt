@@ -4,4 +4,13 @@
 4 - intala o ts-node-dev para que possa rodar o servidor no ambinte de desenvolvimento: npm i -D ts-node-dev
 
 ESLINT
-1 - intalar o estlint: npx eslint --init
+5 - intalar o estlint: npx eslint --init
+
+
+6 - intalar a biblioteca http-status-code: npm i http-status-codes
+7 - instalar biblioteca dotenv: npm i dotenv   / apos no arquivo index.ts: import "dotenv/config";
+
+RODAR EM PRODUÇÃO
+8 - iniciando o arquivo de configuração do typeScript: npx tsc --init
+  - No tsconfig.json: "rootDir": "./src", e "outDir": "./build", 
+  - fazer o build: npx tsc

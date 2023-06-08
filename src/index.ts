@@ -1,3 +1,3 @@
 import { server } from "./server/Server";
 
-server.listen(3001, () => console.log("RODANDO NA PORTA 3001"));
+server.listen(process.env.PORT || 3333, () => console.log(`SERVIDOR RODANDO NA PORTA ${process.env.PORT || 3333}`));

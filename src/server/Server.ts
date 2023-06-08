@@ -1,7 +1,10 @@
-import express from "express";
+import express, { json } from "express";
+import "dotenv/config";
+
+import { router } from "./routes";
 
 export const server = express();
 
-server.get("/", (req, res) => {
-  return res.send("ESSTE E UM TESTE").status(200);
-});
+server.use(json());
+
+server.use(router);
