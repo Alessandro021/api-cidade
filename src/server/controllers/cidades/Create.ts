@@ -6,8 +6,9 @@ interface Icidade {
   nome: string
 }
 
-const bodyValidation: yup.ObjectSchema<Icidade> = yup.object().shape({
+const bodyValidation  = yup.object().shape({
   nome: yup.string().required().min(3),
+  estado: yup.string().required().min(3),
 });
 
 export const create = async (req: Request<{}, {}, Icidade> , res: Response) =>  {
@@ -16,16 +17,18 @@ export const create = async (req: Request<{}, {}, Icidade> , res: Response) =>  
   let validatedData: Icidade | undefined = undefined;
 
   try {
-    validatedData =  await bodyValidation.validate(req.body);
+    validatedData =  await bodyValidation.validate(req.body, {abortEarly: false});
     
-  } catch (error) {
-    const yupError = error as yup.ValidationError;
+  } catch (err) {
+    const yupError = err as yup.ValidationError;
+    const errors: Record<string, string> = {};
 
-    return res.status(StatusCodes.BAD_REQUEST).json({
-      errors: {
-        default: yupError.message
-      }
+    yupError.inner.forEach(error => {
+      if(error.path === undefined) return; 
+      errors[error.path] = error.message;
     });
+
+    return res.status(StatusCodes.BAD_REQUEST).json({ errors: errors });
   }
 
   console.log(validatedData);
