@@ -14,3 +14,5 @@ RODAR EM PRODUÇÃO
 8 - iniciando o arquivo de configuração do typeScript: npx tsc --init
   - No tsconfig.json: "rootDir": "./src", e "outDir": "./build", 
   - fazer o build: npx tsc
+
+9 - instalando a biblioteca yup para validaçãode dados: npm i yup
