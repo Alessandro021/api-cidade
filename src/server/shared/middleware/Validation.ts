@@ -4,15 +4,11 @@ import { ObjectSchema, Schema, ValidationError } from "yup";
 
 type TProperty = "body" | "header" | "params" |"query";
 
-// type TGetSchema = <T>(schema: Schema<T>) => ObjectSchema<any>
-
-// type TGetAllSchemas = (getSchema: TGetSchema) => Partial<TGetAllSchemas>
-
 type TAllSchemas = Record<TProperty, ObjectSchema<any>>;
 
 type TValidation = (schemas: Partial<TAllSchemas>) => RequestHandler;
 
-export const Validation: TValidation = ( schemas ) => async (req, res, next)  => {
+export const validation: TValidation = ( schemas ) => async (req, res, next)  => {
 
   const errorsResult: Record<string, Record<string, string>> = {};
 
@@ -37,6 +33,4 @@ export const Validation: TValidation = ( schemas ) => async (req, res, next)  =>
   } else {
     return res.status(StatusCodes.BAD_REQUEST).json({ errors: errorsResult });
   }
-
- 
 };

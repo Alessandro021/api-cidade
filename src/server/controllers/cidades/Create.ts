@@ -1,7 +1,6 @@
-import { Request, RequestHandler, Response } from "express";
+import { Request, Response } from "express";
 import * as yup from "yup";
-import { StatusCodes} from "http-status-codes";
-import { Validation } from "../../shared/middleware";
+import { validation } from "../../shared/middleware";
 
 
 interface Icidade {
@@ -13,16 +12,16 @@ const bodyValidation : yup.ObjectSchema<Icidade> = yup.object().shape({
   estado: yup.string().required().min(3),
 });
 
+
 interface IFilter {
   filter?: string;
 }
 const queryValidation : yup.ObjectSchema<IFilter> = yup.object().shape({
-  filter: yup.string().required().min(3),
+  filter: yup.string().optional().min(3),
 });
 
 
-
-export const createValidation = Validation({
+export const createValidation = validation({
   body: bodyValidation,
   query: queryValidation
 });
