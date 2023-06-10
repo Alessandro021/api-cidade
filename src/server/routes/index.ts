@@ -12,4 +12,4 @@ router.get("/", (req, res) => {
 
 
 //ROTAS CIDADES
-router.post("/cidades", CidadesController.createBodyValidator, CidadesController.createQueryValidator , CidadesController.create);
+router.post("/cidades", CidadesController.createBodyValidation, CidadesController.createValidation , CidadesController.create);
