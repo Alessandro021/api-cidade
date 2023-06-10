@@ -13,7 +13,6 @@ const bodyValidation : yup.ObjectSchema<Icidade> = yup.object().shape({
   estado: yup.string().required().min(3),
 });
 
-
 interface IFilter {
   filter?: string;
 }
@@ -22,9 +21,11 @@ const queryValidation : yup.ObjectSchema<IFilter> = yup.object().shape({
 });
 
 
-export const createBodyValidation = Validation("body" ,bodyValidation);
-export const createValidation = Validation("query" ,queryValidation);
 
+export const createValidation = Validation({
+  body: bodyValidation,
+  query: queryValidation
+});
 
 
 

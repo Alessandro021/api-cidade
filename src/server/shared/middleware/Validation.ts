@@ -1,23 +1,42 @@
 import { RequestHandler } from "express";
 import { StatusCodes } from "http-status-codes";
-import { Schema, ValidationError } from "yup";
+import { ObjectSchema, Schema, ValidationError } from "yup";
 
+type TProperty = "body" | "header" | "params" |"query";
 
-type TValidation = (field: "body" | "header" | "params" |"query", schema: Schema<any>) => RequestHandler;
+// type TGetSchema = <T>(schema: Schema<T>) => ObjectSchema<any>
 
-export const Validation: TValidation = (field, schema ) => async (req, res, next)  => {
-  try {
-    await schema.validate(req[field], {abortEarly: false});
+// type TGetAllSchemas = (getSchema: TGetSchema) => Partial<TGetAllSchemas>
+
+type TAllSchemas = Record<TProperty, ObjectSchema<any>>;
+
+type TValidation = (schemas: Partial<TAllSchemas>) => RequestHandler;
+
+export const Validation: TValidation = ( schemas ) => async (req, res, next)  => {
+
+  const errorsResult: Record<string, Record<string, string>> = {};
+
+  Object.entries(schemas).forEach(([key, schema]) => {
+
+    try {
+      schema.validateSync(req[key as TProperty], {abortEarly: false});
+    } catch (err) {
+      const yupError = err as ValidationError;
+      const errors: Record<string, string> = {};
+
+      yupError.inner.forEach(error => {
+        if(error.path === undefined) return; 
+        errors[error.path] = error.message;
+      });
+      errorsResult[key] = errors;
+    }
+  });
+
+  if(Object.entries(errorsResult).length === 0){
     return next();
-  } catch (err) {
-    const yupError = err as ValidationError;
-    const errors: Record<string, string> = {};
-
-    yupError.inner.forEach(error => {
-      if(error.path === undefined) return; 
-      errors[error.path] = error.message;
-    });
-
-    return res.status(StatusCodes.BAD_REQUEST).json({ errors: errors });
+  } else {
+    return res.status(StatusCodes.BAD_REQUEST).json({ errors: errorsResult });
   }
+
+ 
 };
