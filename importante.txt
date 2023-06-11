@@ -16,3 +16,7 @@ RODAR EM PRODUÇÃO
   - fazer o build: npx tsc
 
 9 - instalando a biblioteca yup para validaçãode dados: npm i yup
+
+10- instalando biblioteca de teste jest: npm i jest ts-jest @types/jest
+  - depois: npx jest --init
+  - intalar biblioteca: npm i -D supertest @types/supertest
