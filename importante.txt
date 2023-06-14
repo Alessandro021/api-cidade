@@ -20,3 +20,14 @@ RODAR EM PRODUÇÃO
 10- instalando biblioteca de teste jest: npm i jest ts-jest @types/jest
   - depois: npx jest --init
   - intalar biblioteca: npm i -D supertest @types/supertest
+
+11 - intalando biblioteca que ajuda na consulta a banco de dados SQL: npm i knex
+   - apos: npm i pg -D
+   - : npm i -D @types/pg
+   - ou BD Sqlite: npm install sqlite3 -D
+
+12 - criar as migrations: npx knex --knexfile ./src/server/database/knex/Environment.ts migrate:make teste
+   - rodar uma migration: npx knex --knexfile ./src/server/database/knex/Environment.ts migrate:latest
+   - volta uma migration: npx knex --knexfile ./src/server/database/knex/Environment.ts migrate:rollback
+   - volta todas as migrations do DB: npx knex --knexfile ./src/server/database/knex/Environment.ts migrate:rollback --all
+   - : npx knex --knexfile ./src/server/database/knex/Environment.ts seed:run
