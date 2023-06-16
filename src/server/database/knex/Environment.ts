@@ -12,6 +12,7 @@ export const development:  Knex.Config = {
     user :  process.env.USER_DATABASE,
     password : String(process.env.PASSWORD_DATABASE),
     database : process.env.DATABASE,
+
   },
   migrations: {
     directory: path.resolve(__dirname, "..", "migrations")

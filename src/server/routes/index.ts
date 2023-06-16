@@ -1,6 +1,8 @@
 import { Router } from "express";
 
 import { CidadesController } from "../controllers/cidades";
+import { PessoaController } from "../controllers/pessoas";
+
 
 export const router = Router();
 
@@ -16,3 +18,10 @@ router.post("/cidades", CidadesController.createValidation , CidadesController.c
 router.get("/cidades/:id", CidadesController.getByIdValidation , CidadesController.getById);
 router.put("/cidades/:id", CidadesController.updateByIdValidation , CidadesController.updateById);
 router.delete("/cidades/:id", CidadesController.deleteByIdValidation, CidadesController.deleteById);
+
+//ROTAS PESSOAS
+router.get("/pessoas", PessoaController.getAllValidation , PessoaController.getAll);
+router.post("/pessoas", PessoaController.createValidation , PessoaController.create);
+router.get("/pessoas/:id", PessoaController.getByIdValidation , PessoaController.getById);
+router.put("/pessoas/:id", PessoaController.updateByIdValidation , PessoaController.updateById);
+router.delete("/pessoas/:id", PessoaController.deleteByIdValidation, PessoaController.deleteById);

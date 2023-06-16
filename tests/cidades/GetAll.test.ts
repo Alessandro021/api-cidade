@@ -14,7 +14,7 @@ describe("Cidades - GetAll", () => {
     const resBuscada = await testServer.get("/cidades").send();
 
 
-    // expect(Number(resBuscada.headers["x-total-count"])).toBeGreaterThan(0);
+    expect(Number(resBuscada.headers["x-total-count"])).toBeGreaterThan(0);
     expect(resBuscada.statusCode).toEqual(StatusCodes.OK);
     expect(resBuscada.body.length).toBeGreaterThan(0);
   });

@@ -8,7 +8,7 @@ const startServer = () => {
 
 if(process.env.IS_LOCALHOST !== "true"){
   Knex.migrate.latest().then(_ => {
-    startServer();
+    Knex.seed.run().then(_ =>  startServer()).catch(console.log);
   }).catch(console.log);
 
 } else {
