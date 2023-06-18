@@ -31,3 +31,12 @@ RODAR EM PRODUÇÃO
    - volta uma migration: npx knex --knexfile ./src/server/database/knex/Environment.ts migrate:rollback
    - volta todas as migrations do DB: npx knex --knexfile ./src/server/database/knex/Environment.ts migrate:rollback --all
    - : npx knex --knexfile ./src/server/database/knex/Environment.ts seed:run
+
+13 - instalar biblioteca de criptografia: npm i bcryptjs
+   - depois: npm i -D @types/bcryptjs
+
+14 - instalar biblioteca de token JWT: npm i jsonwebtoken
+   - depois: npm i -D @types/jsonwebtoken
+
+15 - instalar a biblioteca cors: npm i cors
+   - depois: npm i -D @types/cors

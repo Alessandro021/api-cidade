@@ -4,7 +4,6 @@ import "dotenv/config";
 
 export const development:  Knex.Config = {
   client: "pg",
-  useNullAsDefault: true,
   connection: {
 
     host : process.env.HOST_DATABASE ,
